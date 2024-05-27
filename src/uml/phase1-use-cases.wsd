@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+actor admin as a1
+
+package Person {
+	usecase "Create" as UC1
+	usecase "Read one Person" as UC2
+	usecase "Read all People" as UC3
+	usecase "Update a Person" as UC4
+	usecase "Delete a Person" as UC5
+}
+a1 --> UC1
+a1 --> UC2
+a1 --> UC3
+a1 --> UC4
+a1 --> UC5
+
+actor admin as a2
+package ActionRequired {
+	usecase "Create" as UC6
+	usecase "Read a person's AR" as UC7
+	usecase "Read all person's ARs" as UC8
+	usecase "Update a person's A" as UC9
+	usecase "Delete a person's A" as UC10
+}
+a2 --> UC6
+a2 --> UC7
+a2 --> UC8
+a2 --> UC9
+a2 --> UC10
+@endum
