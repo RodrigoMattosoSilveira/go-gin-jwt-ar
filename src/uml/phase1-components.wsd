@@ -1,0 +1,31 @@
+@startuml
+package "Client" {
+	[cURL] as client
+	[client] ..> HTTP : use
+}
+
+node "Action Required" {
+	package "HTTP Server" {
+		[GIN (GO)] as web
+		[web] ..> routes : use
+	}
+	package "Application Logic (GO)" {
+		[Controller] as ctrlr
+		[ctrlr] ..> CRUD2 : use
+		[Service] as srvc
+		[srvc] ..> CRUD1 : use
+		[Repository] as repo
+		[repo] ..> SQL : use
+	}
+}
+
+package "Database" {
+	[repo (SQLITE)] as db
+}
+
+web - HTTP
+ctrlr - routes
+srvc - CRUD2
+repo - CRUD1
+db - SQL
+@enduml
