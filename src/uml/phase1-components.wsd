@@ -1,9 +1,10 @@
 @startuml
-package "Client" {
-	[cURL] as client
-	[client] ..> HTTP : use
+node "ClientNode" {
+	package "Client" {
+		[cURL] as client
+		[client] ..> HTTP : use
+	}
 }
-
 node "Action Required" {
 	package "HTTP Server" {
 		[GIN (GO)] as web
@@ -19,8 +20,10 @@ node "Action Required" {
 	}
 }
 
-package "Database" {
-	[repo (SQLITE)] as db
+node DatabaseNode {
+	package "Database" {
+		[repo (SQLITE)] as db
+	}
 }
 
 web - HTTP
