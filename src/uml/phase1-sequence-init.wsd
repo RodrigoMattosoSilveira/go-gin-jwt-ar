@@ -1,0 +1,15 @@
+@startuml Phase I Initialization
+actor Admin
+entity Main
+entity Gin
+database SQLite
+autonumber
+Admin -> Main: Launch service
+Main -> SQLite: Initialize Database
+SQLite --> Main: Database Initialization response 
+Main -> Gin: Initialize HTTP
+Gin --> Main: HTTP Initialization response
+Main -> Gin: Set up HTTP Request Routes
+Main -> Gin: Launch the HTTP server
+Admin -> Main: Kill service
+@enduml

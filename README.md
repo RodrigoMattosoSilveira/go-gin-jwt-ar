@@ -41,20 +41,29 @@ In secure software systems, Authorization must always follow Authentication. A p
 
 # The AR Software System
 ## Use Cases
+Since the AR Services does not have Authorization and Authentication, we assume that we have one actor, `admin`, who, for now, his implicitly authenticated and authorized to perform all use cases.
+
 ![Phase I Use Cases](https://github.com/RodrigoMattosoSilveira/go-gin-jwt-ar/blob/main/out/src/uml/phase1-use-cases/phase1-use-cases.png)
 
-Since the AR Services does not have Authorization and Authentication, we assume that we have one actor, admin, who will execute all use cases.
-
 ## Components
+Although most of us are familiar with the component structure of a simple HTTP server, I'm including it here to aid on learning `JWT`.
+
 ![Phase I Components](https://github.com/RodrigoMattosoSilveira/go-gin-jwt-ar/blob/main/out/src/uml/phase1-components/phase1-components.png)
 We have 3 nodes, each with their own packages and components:
-- `Client` - I'll use [cURL](https://curl.se/docs/manpage.html) to request HTTP server services and receive HTTP server responses; I'll integrate a nicer user experience later;
-- `Action Required` - This is where the software system core logic resides, split into three packages:
+- `Client` - I'll use `cURL` to request HTTP server services and receive HTTP server responses; I'll integrate a nicer user experience later;
+- `Action Required` - This is where the software system core logic resides, consisting of three packages:
 	- **Main** - This package uses the `HTTP Server` API to configure the manner in which it will interact with the `Application Logic`, the database API to gain a handle which will be by the Repository to Read / Write to the database; last but not least, it launches the `HTTP Server`; 
-        - **HTTP Server** - I'll configure the Gin routers required to support the HTTP server requests and responses; the Gin logic is completely under the hood, making it a very simple tool to integrate;
+    - **HTTP Server** - I'll configure the Gin routers required to support the HTTP server requests and responses; the Gin logic is completely under the hood, making it a very simple tool to integrate;
 	- **Application Logic** - This is where the software system core logic resides, split into a few components, all of which have `gin.Context` as their first parameter; it is the most important part of Gin; it carries request details, validates and serializes JSON, and more. (Despite the similar name, this is different from Go’s built-in [context](https://go.dev/pkg/context/) package.):
 		- _**Controller**_ - It exposes the routing required to handle the HTTP Requests and return the HTTP Responses; it also uses the CRUD interface (same as CRUD1) to interact any Service component that implements it; it includes logic to validate the requests; it uses the CRUD Interface to call the Services component. I'll integrated Gin Middleware components later;
 		- _**Service**_ -  Logic that exposes the CRUD interface (same as CRUD1) to easily integrate to ANY Controller; it also uses the CRUD interface to interact with the repositories that implement it. For now, pass thru logic, that uses the Repository Interface to call the Repository logic;
 		- _**Repository**_ - Logic that exposes the CRUD interface (same as CRUD1) to easily integrate to ANY Service; it also uses the SQL interface to interact with the database;
 - `Database` - I'll use [SQLite](https://www.google.com/search?q=sqlite3&ie=UTF-8&oe=UTF-8&hl=en-us&client=safari), a fully SQL compatible, very effective and simple to use RBMS database.
 
+## Sequence
+Although most of us are familiar with the flow of a simple HTTP server, I'm including it here to aid on learning `JWT`.
+
+### Service Initialization & Termination
+There is one human, `Admin`, and 3 system actors, `Main` / `Gin` / `SQLite`, involved in configuring and launching the `AR service`:
+
+![Phase I Components](https://github.com/RodrigoMattosoSilveira/go-gin-jwt-ar/blob/main/out/src/uml/phase1-components/phase1-components.png)
