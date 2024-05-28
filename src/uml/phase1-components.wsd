@@ -1,4 +1,4 @@
-@startuml
+@startuml Phase I Components
 node "ClientNode" {
 	package "Client" {
 		[cURL] as client
