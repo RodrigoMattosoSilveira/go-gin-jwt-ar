@@ -66,4 +66,10 @@ Although most of us are familiar with the flow of a simple HTTP server, I'm incl
 ### Service Initialization & Termination
 There is one human, `Admin`, and 3 system actors, `Main` / `Gin` / `SQLite`, involved in configuring and launching the `AR service`:
 
-![Phase I Components](https://github.com/RodrigoMattosoSilveira/go-gin-jwt-ar/blob/main/out/src/uml/phase1-sequence-init/Phase%20I%20Initialization.png)
+![Phase I Initialization](https://github.com/RodrigoMattosoSilveira/go-gin-jwt-ar/blob/main/out/src/uml/phase1-sequence-init/Phase%20I%20Initialization.png)
+
+### Service Execution
+This is a standard HTTP sequence, except about how `Gin` handles status. Whenever the logic detects an error, it records it uses a `ctx.JSON(200, gin.H{"data": person})` statement, where `ctx` is the `gin.Context`, and returns whithout return values. Sequence steps 4 and 9 illustrate this:
+
+![Phase I HTTP](https://github.com/RodrigoMattosoSilveira/go-gin-jwt-ar/blob/main/out/src/uml/phase1-sequence-init/Phase%20I%20HTTP.png)
+

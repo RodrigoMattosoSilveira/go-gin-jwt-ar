@@ -1,0 +1,36 @@
+@startuml Phase I HTTP
+actor Admin as admin
+entity cURL
+entity "HTTP Service" as http
+entity Controller as ctlr
+entity Service as svc
+entity Repository as repo
+database SQLite as db
+autonumber
+admin -> cURL: HTTP request
+activate cURL
+cURL -> http: HTTP request
+activate http
+http -> ctlr: Route
+activate ctlr
+ctlr -> http: Invalid 
+ctlr -> svc: Validade 
+activate svc
+svc -> repo: Ignore
+activate repo
+repo -> db: Execute SQL
+activate db
+db --> repo: SQL Result
+deactivate db
+repo --> http: Record Result
+repo --> svc
+deactivate repo
+svc --> ctlr
+deactivate svc
+ctlr --> http
+deactivate ctlr
+http --> cURL
+deactivate http
+cURL --> admin
+deactivate cURL
+@enduml
