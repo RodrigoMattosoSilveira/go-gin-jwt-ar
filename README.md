@@ -69,7 +69,9 @@ There is one human, `Admin`, and 3 system actors, `Main` / `Gin` / `SQLite`, inv
 ![Phase I Initialization](https://github.com/RodrigoMattosoSilveira/go-gin-jwt-ar/blob/main/out/src/uml/phase1-sequence-init/Phase%20I%20Initialization.png)
 
 ### Service Execution
-This is a standard HTTP sequence, except about how `Gin` handles status. Whenever the logic detects an error, it records it uses a `ctx.JSON(200, gin.H{"data": person})` statement, where `ctx` is the `gin.Context`, and returns whithout return values. Sequence steps 4 and 9 illustrate this:
+This is a standard HTTP sequence, except about how `Gin` handles status. All `Gin` handling logic receive its context, `gin.Context`, and do not return any values. In all cases, the logic records the status in the `Gin context` and simple return. In the example below, the steos sequence [1, 2, 3, 4, 13, 14] and 9 illustrate error handling detected at the `Controller`, whereas the step sequence [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12 13, 14] illustrate a success.
+
+When the logic detects an error, it  the logic detects an error, it records it uses a `ctx.JSON(200, gin.H{"data": person})` statement, where `ctx` is the `gin.Context`, and returns whithout return values. Sequence steps 4 and 9 illustrate this:
 
 ![Phase I HTTP](https://github.com/RodrigoMattosoSilveira/go-gin-jwt-ar/blob/main/out/src/uml/phase1-sequence-http/Phase%20I%20HTTP.png)
 
