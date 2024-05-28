@@ -66,4 +66,4 @@ Although most of us are familiar with the flow of a simple HTTP server, I'm incl
 ### Service Initialization & Termination
 There is one human, `Admin`, and 3 system actors, `Main` / `Gin` / `SQLite`, involved in configuring and launching the `AR service`:
 
-![Phase I Components](https://github.com/RodrigoMattosoSilveira/go-gin-jwt-ar/blob/main/out/src/uml/phase1-components/phase1-components.png)
+![Phase I Components](https://github.com/RodrigoMattosoSilveira/go-gin-jwt-ar/blob/main/out/src/uml/phase1-sequence-init/Phase%20I%20Initialization.png)
