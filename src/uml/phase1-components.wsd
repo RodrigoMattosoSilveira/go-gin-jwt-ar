@@ -6,6 +6,11 @@ node "ClientNode" {
 	}
 }
 node "Action Required" {
+	package "main" {
+		[Main] as m
+		[m] ..> webCfg : use
+		[m] ..> dbCfg : use
+	}
 	package "HTTP Server" {
 		[GIN (GO)] as web
 		[web] ..> routes : use
@@ -27,8 +32,10 @@ node DatabaseNode {
 }
 
 web - HTTP
+web - webCfg
 ctrlr - routes
 srvc - CRUD2
 repo - CRUD1
 db - SQL
+db - dbCfg
 @enduml
